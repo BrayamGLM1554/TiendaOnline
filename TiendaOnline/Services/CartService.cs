@@ -24,7 +24,7 @@ namespace TiendaOnline.Services
         }
         public async Task<ResponseDto> EmailCart(CartDto cartDto)
         {
-            
+            Console.WriteLine($"request: {JsonConvert.SerializeObject(cartDto)}");
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = Utility.Utilities.ApiType.POST,

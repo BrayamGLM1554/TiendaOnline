@@ -3,110 +3,119 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container-fluid">
+<div class="container-fluid main-profile-container">
     <div class="row justify-content-center">
         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
-            <div class="card shadow-lg p-4 mb-5 bg-white rounded border-top border-4 border-orange">
-                <div class="card-title">
-                    <h3 class="roboto-bold title-orange">
-                        <i class="fas fa-user-tie me-2"></i>
-                        Perfil de Usuario
+            <div class="card profile-card shadow-lg p-4 mb-5 bg-white rounded border-top border-4 border-blue">
+                <div class="card-title profile-header">
+                    <h3 class="roboto-bold title-blue">
+                        <i class="fas fa-user-cog me-2"></i>
+                        Mi Perfil
                     </h3>
+                    <hr class="border-blue" />
+                    <div class="card-subtitle mb-4">
+                        <span class="roboto-light subtitle-text">Administra la información de tu cuenta</span>
+                    </div>
                 </div>
-                <hr class="border-orange" />
-                <div class="card-subtitle mb-4">
-                    <span class="roboto-light text-muted">Completa los datos de tu cuenta</span>
-                </div>
+
                 <div class="card-body">
                     <form>
                         <!-- Sección de información básica -->
-                        <div class="mb-4">
-                            <h5 class="roboto-medium text-orange mb-3"><i class="fas fa-id-card me-2"></i>Información Básica</h5>
+                        <div class="mb-4 section-container">
+                            <h5 class="roboto-medium section-title text-blue mb-3">
+                                <i class="fas fa-id-badge me-2"></i>Información Básica
+                            </h5>
 
                             <div class="row mb-3">
-                                <label class="col-md-3 col-form-label roboto-light">Nombre de perfil:</label>
+                                <label class="col-md-3 col-form-label roboto-light label-text">Nombre de perfil:</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control form-control-lg border-orange" placeholder="Nombre del Perfil" required />
+                                    <input type="text" class="form-control form-control-custom border-blue" placeholder="Ingresa el nombre de tu perfil" required />
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-md-3 col-form-label roboto-light">Descripción:</label>
+                                <label class="col-md-3 col-form-label roboto-light label-text">Descripción:</label>
                                 <div class="col-md-9">
-                                    <textarea rows="3" class="form-control form-control-lg border-orange" placeholder="Descripción del Perfil"></textarea>
+                                    <textarea rows="3" class="form-control form-control-custom border-blue" placeholder="Cuéntanos un poco sobre ti..."></textarea>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Sección de datos personales -->
-                        <div class="mb-4">
-                            <h5 class="roboto-medium text-orange mb-3"><i class="fas fa-user-circle me-2"></i>Datos Personales</h5>
+                        <div class="mb-4 section-container">
+                            <h5 class="roboto-medium section-title text-blue mb-3">
+                                <i class="fas fa-user me-2"></i>Datos Personales
+                            </h5>
 
                             <div class="row mb-3">
-                                <label class="col-md-3 col-form-label roboto-light">Nombre:</label>
+                                <label class="col-md-3 col-form-label roboto-light label-text">Nombre:</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control form-control-lg border-orange" placeholder="Nombre completo" required />
+                                    <input type="text" class="form-control form-control-custom border-blue" placeholder="Tu nombre completo" required />
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-md-3 col-form-label roboto-light">Apellido Paterno:</label>
+                                <label class="col-md-3 col-form-label roboto-light label-text">Apellido Paterno:</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control form-control-lg border-orange" placeholder="Apellido Paterno" required />
+                                    <input type="text" class="form-control form-control-custom border-blue" placeholder="Apellido paterno" required />
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-md-3 col-form-label roboto-light">Apellido Materno:</label>
+                                <label class="col-md-3 col-form-label roboto-light label-text">Apellido Materno:</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control form-control-lg border-orange" placeholder="Apellido Materno" required />
+                                    <input type="text" class="form-control form-control-custom border-blue" placeholder="Apellido materno" required />
                                 </div>
                             </div>
                         </div>
 
                         <!-- Sección de contacto -->
-                        <div class="mb-4">
-                            <h5 class="roboto-medium text-orange mb-3"><i class="fas fa-address-book me-2"></i>Información de Contacto</h5>
+                        <div class="mb-4 section-container">
+                            <h5 class="roboto-medium section-title text-blue mb-3">
+                                <i class="fas fa-envelope me-2"></i>Información de Contacto
+                            </h5>
 
                             <div class="row mb-3">
-                                <label class="col-md-3 col-form-label roboto-light">Email:</label>
+                                <label class="col-md-3 col-form-label roboto-light label-text">Email:</label>
                                 <div class="col-md-9">
-                                    <input type="email" class="form-control form-control-lg border-orange" placeholder="Correo Electrónico" required />
+                                    <input type="email" class="form-control form-control-custom border-blue" placeholder="tu@email.com" required />
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-md-3 col-form-label roboto-light">Núm. Celular:</label>
+                                <label class="col-md-3 col-form-label roboto-light label-text">Núm. Celular:</label>
                                 <div class="col-md-9">
-                                    <input type="tel" class="form-control form-control-lg border-orange" placeholder="Número de Celular" required />
+                                    <input type="tel" class="form-control form-control-custom border-blue" placeholder="(555) 123-4567" required />
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-md-3 col-form-label roboto-light">Género:</label>
+                                <label class="col-md-3 col-form-label roboto-light label-text">Género:</label>
                                 <div class="col-md-9">
-                                    <select class="form-select form-select-lg border-orange">
-                                        <option selected>Seleccionar</option>
+                                    <select class="form-select form-select-custom border-blue">
+                                        <option selected>Selecciona una opción</option>
                                         <option value="1">Masculino</option>
                                         <option value="2">Femenino</option>
-                                        <option value="3">Prefiero No Decirlo</option>
+                                        <option value="3">Prefiero No Especificar</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Sección de foto y acciones -->
-                        <div class="mb-4">
-                            <h5 class="roboto-medium text-orange mb-3"><i class="fas fa-camera me-2"></i>Foto de Perfil</h5>
+                        <div class="mb-4 section-container">
+                            <h5 class="roboto-medium section-title text-blue mb-3">
+                                <i class="fas fa-image me-2"></i>Foto de Perfil
+                            </h5>
 
                             <div class="row mb-3">
                                 <div class="col-md-12">
-                                    <div class="dropzone border-orange p-4 text-center rounded">
-                                        <i class="fas fa-cloud-upload-alt fa-3x text-orange mb-3"></i>
-                                        <p class="roboto-light">Arrastra tu foto aquí o haz clic para seleccionar</p>
+                                    <div class="dropzone border-blue p-4 text-center rounded">
+                                        <i class="fas fa-cloud-upload-alt fa-3x text-blue mb-3"></i>
+                                        <p class="roboto-light upload-text">Arrastra tu imagen aquí o selecciona un archivo</p>
                                         <input type="file" accept="image/*" id="txtFile" class="d-none" />
-                                        <button type="button" class="btn btn-outline-orange" onclick="document.getElementById('txtFile').click()">
-                                            Seleccionar Archivo
+                                        <button type="button" class="btn btn-outline-blue" onclick="document.getElementById('txtFile').click()">
+                                            <i class="fas fa-folder-open me-2"></i>Buscar Archivo
                                         </button>
                                     </div>
                                 </div>
@@ -114,15 +123,15 @@
                         </div>
 
                         <!-- Botones de acción -->
-                        <div class="d-flex justify-content-between mt-4">
-                            <button type="button" class="btn btn-outline-orange roboto-bold" id="btnDireccion">
+                        <div class="d-flex justify-content-between mt-4 action-buttons">
+                            <button type="button" class="btn btn-outline-blue roboto-bold" id="btnDireccion">
                                 <i class="fas fa-map-marker-alt me-2"></i>
-                                Agregar Dirección
+                                Gestionar Dirección
                             </button>
 
-                            <button type="submit" class="btn btn-orange roboto-bold px-4">
-                                <i class="fas fa-save me-2"></i>
-                                Guardar Perfil
+                            <button type="submit" class="btn btn-blue roboto-bold px-4">
+                                <i class="fas fa-check-circle me-2"></i>
+                                Actualizar Perfil
                             </button>
                         </div>
                     </form>
@@ -135,38 +144,146 @@
 <script src="~/js/create-file.js"></script>
 
 <style>
-    .title-orange, .text-orange {
-        color: #FF6B35;
+    :root {
+        --color-principal: #3b82f6;
+        --color-hover: #2563eb;
+        --color-texto: #1f2937;
+        --color-secundario: #1e40af;
+        --color-accent: #06b6d4;
     }
 
-    .border-orange {
-        border-color: #FF6B35 !important;
+    .main-profile-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 30px 0;
     }
 
-    .btn-orange {
-        background-color: #FF6B35;
+    .profile-card {
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15) !important;
+        border-left: 6px solid var(--color-principal) !important;
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        border-radius: 20px 20px 0 0;
+        margin: -1.5rem -1.5rem 30px -1.5rem;
+        padding: 30px;
+    }
+
+    .title-blue, .text-blue {
+        color: var(--color-principal);
+    }
+
+    .border-blue {
+        border-color: var(--color-principal) !important;
+    }
+
+    .btn-blue {
+        background-color: var(--color-principal);
         color: white;
+        border: none;
+        transition: all 0.3s ease;
+        border-radius: 10px;
+        padding: 12px 24px;
+        font-weight: 600;
     }
 
-    .btn-outline-orange {
-        border-color: #FF6B35;
-        color: #FF6B35;
-    }
-
-        .btn-outline-orange:hover {
-            background-color: #FF6B35;
+        .btn-blue:hover {
+            background-color: var(--color-hover);
             color: white;
+            transform: translateY(-1px);
+        }
+
+    .btn-outline-blue {
+        border-color: var(--color-principal);
+        color: var(--color-principal);
+        transition: all 0.3s ease;
+        border-radius: 10px;
+        padding: 12px 24px;
+        font-weight: 600;
+        border-width: 2px;
+    }
+
+        .btn-outline-blue:hover {
+            background-color: var(--color-principal);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+    .form-control-custom {
+        border-radius: 10px;
+        border: 2px solid #e2e8f0;
+        transition: all 0.3s ease;
+        padding: 12px 16px;
+        background-color: #f8fafc;
+        font-size: 1rem;
+    }
+
+    .form-select-custom {
+        border-radius: 10px;
+        border: 2px solid #e2e8f0;
+        transition: all 0.3s ease;
+        padding: 12px 16px;
+        background-color: #f8fafc;
+        font-size: 1rem;
+    }
+
+        .form-control-custom:focus, .form-select-custom:focus {
+            border-color: var(--color-principal);
+            box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.15);
+            background-color: white;
         }
 
     .dropzone {
-        border: 2px dashed #FF6B35;
+        border: 3px dashed var(--color-principal);
         transition: all 0.3s;
+        background-color: #f8fafc;
+        border-radius: 15px;
     }
 
         .dropzone:hover {
-            background-color: rgba(255, 107, 53, 0.1);
+            background-color: rgba(59, 130, 246, 0.1);
             cursor: pointer;
+            border-color: var(--color-hover);
         }
+
+    .section-container {
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 25px;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    .section-title {
+        border-bottom: 2px solid var(--color-accent);
+        padding-bottom: 10px;
+        margin-bottom: 20px !important;
+    }
+
+    .label-text {
+        color: var(--color-texto);
+        font-weight: 600;
+    }
+
+    .subtitle-text {
+        color: #64748b;
+        font-size: 1rem;
+    }
+
+    .upload-text {
+        color: var(--color-texto);
+        margin-bottom: 15px;
+    }
+
+    .action-buttons {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+    }
 
     .roboto-bold {
         font-family: 'Roboto', sans-serif;

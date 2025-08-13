@@ -2,186 +2,542 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section Styles {
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" rel="stylesheet" />
-    <style>
-        .product-card {
-            border: 1px solid #eee;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
 
-            .product-card:hover {
-                transform: scale(1.03);
-            }
-
-        .product-image {
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .price {
-            font-weight: bold;
-            color: #28a745;
-        }
-
-        .rating i {
-            color: gold;
-        }
-    </style>
-}
-
-<div class="container mt-4 vw-100">
-    <!-- Header principal -->
-    <header class="store-header w-100">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3 mb-3 mb-lg-0">
-                    <h1><i class="fas fa-store me-2"></i>KnowCloud</h1>
-                    <p class="mb-0">Los mejores productos al mejor precio</p>
-                </div>
-                <div class="col-lg-6 mb-3 mb-lg-0">
-                    <div class="search-bar">
-                        <input type="text" class="form-control" id="searchInput" placeholder="¿Qué estás buscando hoy?">
-                        <button type="button" id="searchButton"><i class="fas fa-search"></i></button>
+<div class="products-container">
+    <div class="products-card">
+        <!-- Header principal -->
+        <div class="products-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4">
+                        <h1 class="store-title">
+                            <i class="fas fa-store me-2"></i>
+                            KnowCloud
+                        </h1>
+                        <p class="store-subtitle">Los mejores productos al mejor precio</p>
                     </div>
-                </div>
-
-            </div>
-        </div>
-    </header>
-    <!-- Filtros -->
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <label class="roboto-thin-ExtraLight-200 title-morado">Buscar producto</label>
-            <input type="text" class="form-control" id="searchInput" placeholder="Nombre del producto...">
-        </div>
-        <div class="col-md-3">
-            <label class="roboto-thin-ExtraLight-200 title-morado">Precio máximo</label>
-            <input type="number" class="form-control" id="priceFilter" placeholder="Precio máximo">
-        </div>
-        <div class="col-md-3">
-            <label class="roboto-thin-ExtraLight-200 title-morado">Valoración mínima</label>
-            <select class="form-control" id="ratingFilter">
-                <option value="">Todas</option>
-                <option value="1">1+ estrella</option>
-                <option value="2">2+ estrellas</option>
-                <option value="3">3+ estrellas</option>
-                <option value="4">4+ estrellas</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <label class="roboto-thin-ExtraLight-200 title-morado">Ordenar por</label>
-            <select class="form-control" id="sortFilter">
-                <option value="none">Seleccionar</option>
-                <option value="priceAsc">Precio: menor a mayor</option>
-                <option value="priceDesc">Precio: mayor a menor</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- Carrusel de productos destacados -->
-    <h4 class="mb-3 roboto-Medium-500 title-orange">Buscar un Producto</h4>
-    <div class="owl-carousel owl-theme mb-5">
-        <div class="item">
-            <div class="card" style="width: 18rem;">
-                <img src="https://m.media-amazon.com/images/I/71ZsWZIkQ+L._AC_SY695_.jpg" class="img-fluid card-img-top" alt="Producto 1" />
-                <div class="card-body">
-                    <h5 class="card-title title-orange">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Ver más</a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="card" style="width: 18rem;">
-                <img src="https://m.media-amazon.com/images/I/61vFB6cgvbL._AC_SY606_.jpg" class="img-fluid" alt="Producto 2" />
-                <div class="card-body">
-                    <h5 class="card-title title-orange">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-
-        </div>
-        <div class="item">
-            <div class="card" style="width: 18rem;">
-                <img src="https://m.media-amazon.com/images/I/61L4LlIfJ5L._AC_SX569_.jpg" class="img-fluid card-img-top" alt="Producto 3" />
-                <div class="card-body">
-                    <h5 class="card-title title-orange">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-
-        </div>
-        <div class="item">
-            <div class="card" style="width: 18rem;">
-                <img src="https://m.media-amazon.com/images/I/51HRSbhjLvL._AC_SY741_.jpg" class="img-fluid card-img-top" alt="Producto 4" />
-                <div class="card-body">
-                    <h5 class="card-title title-orange">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="row mb-4">
-        <input type="text" id="searchInput" placeholder="Buscar producto..." class="form-control" />
-    </div>
-
-    <div id="carouselContainer" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner" id="carouselItemsContainer"></div>
-    </div>
-
-    <div class="row" id="productContainer"></div>
-    <div class="text-center mt-4 mb-2">
-        <button id="loadMoreBtn" class="btn btn-primary">Cargar más</button>
-    </div>
-
-    <!-- Grid de productos -->
-    <div class="row" id="productList">
-        @foreach (var product in Model)
-        {
-            <div class="col-md-4 mb-4 product-item" data-name="@product.Name" data-price="product.Price">
-                <div class="product-card">
-                    <img src="@product.ImageUrl" class="w-100 product-image" alt="@product.Name" />
-                    <div class="p-3">
-                        <h5 class="roboto-SemiBold-600 title-morado">@product.Name</h5>
-                        <p class="price roboto-Medium-500">@string.Format("{0:c}", product.Price)</p>
-                        <a asp-action="ProductDetails" asp-route-productId="@product.ProductId"
-                           class="btn btn-outline-primary btn-sm mt-2 roboto-Light-300">Detalles</a>
-
+                    <div class="col-lg-8">
+                        <div class="search-section">
+                            <div class="search-bar-main">
+                                <input type="text" class="form-control search-input" id="searchInput" placeholder="¿Qué estás buscando hoy?">
+                                <button type="button" class="btn-search" id="searchButton">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        }
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="filter-label">Buscar producto</label>
+                        <input type="text" class="form-control filter-input" id="productSearchInput" placeholder="Nombre del producto...">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="filter-label">Precio máximo</label>
+                        <input type="number" class="form-control filter-input" id="priceFilter" placeholder="Precio máximo">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="filter-label">Valoración mínima</label>
+                        <select class="form-control filter-input" id="ratingFilter">
+                            <option value="">Todas</option>
+                            <option value="1">1+ estrella</option>
+                            <option value="2">2+ estrellas</option>
+                            <option value="3">3+ estrellas</option>
+                            <option value="4">4+ estrellas</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="filter-label">Ordenar por</label>
+                        <select class="form-control filter-input" id="sortFilter">
+                            <option value="none">Seleccionar</option>
+                            <option value="priceAsc">Precio: menor a mayor</option>
+                            <option value="priceDesc">Precio: mayor a menor</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Productos destacados -->
+        <div class="featured-section">
+            <div class="container">
+                <h4 class="section-title">
+                    <i class="fas fa-star me-2"></i>
+                    Productos Destacados
+                </h4>
+                <div class="featured-carousel">
+                    <div class="featured-item">
+                        <div class="featured-card">
+                            <div class="featured-image-container">
+                                <img src="https://m.media-amazon.com/images/I/71ZsWZIkQ+L._AC_SY695_.jpg" class="featured-image" alt="Producto 1" />
+                            </div>
+                            <div class="featured-content">
+                                <h5 class="featured-title">Producto Destacado 1</h5>
+                                <p class="featured-description">Descripción del producto destacado con características principales.</p>
+                                <div class="featured-price">$99.99</div>
+                                <button class="btn btn-featured">Ver más</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid de productos -->
+        <div class="products-grid-section">
+            <div class="container">
+                <h4 class="section-title">
+                    <i class="fas fa-shopping-bag me-2"></i>
+                    Todos los Productos
+                </h4>
+                <div class="row" id="productList">
+                    @foreach (var product in Model)
+                    {
+                        <div class="col-lg-4 col-md-6 mb-4 product-item" data-name="@product.Name" data-price="@product.Price">
+                            <div class="product-card">
+                                <div class="product-image-container">
+                                    <img src="@product.ImageUrl" class="product-image" alt="@product.Name" />
+                                    <div class="product-overlay">
+                                        <button class="btn-quick-view">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-content">
+                                    <h5 class="product-name">@product.Name</h5>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <div class="product-price">@string.Format("{0:c}", product.Price)</div>
+                                    <div class="product-actions">
+                                        <a asp-action="ProductDetails" asp-route-productId="@product.ProductId" class="btn btn-product-details">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            Detalles
+                                        </a>
+                                        <button class="btn btn-add-to-cart">
+                                            <i class="fas fa-shopping-cart me-2"></i>
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="load-more-section">
+                    <button id="loadMoreBtn" class="btn btn-load-more">
+                        <i class="fas fa-plus me-2"></i>
+                        Cargar más productos
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
+<style>
+    :root {
+        --color-principal: #3b82f6;
+        --color-hover: #2563eb;
+        --color-texto: #1f2937;
+        --color-secundario: #1e40af;
+        --color-accent: #06b6d4;
+        --color-success: #10b981;
+        --color-danger: #ef4444;
+        --color-warning: #f59e0b;
+    }
+
+    .products-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px 0;
+    }
+
+    .products-card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+        border: none;
+        overflow: hidden;
+        margin: 0 15px;
+    }
+
+    /* Header */
+    .products-header {
+        background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-secundario) 100%);
+        color: white;
+        padding: 30px 0;
+    }
+
+    .store-title {
+        font-weight: 700;
+        margin: 0;
+        font-size: 2.2rem;
+    }
+
+    .store-subtitle {
+        margin: 0;
+        opacity: 0.9;
+        font-size: 1.1rem;
+    }
+
+    .search-section {
+        margin-top: 20px;
+    }
+
+    .search-bar-main {
+        display: flex;
+        gap: 0;
+        max-width: 500px;
+        margin-left: auto;
+    }
+
+    .search-input {
+        border: none;
+        border-radius: 12px 0 0 12px;
+        padding: 12px 20px;
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+        .search-input:focus {
+            box-shadow: none;
+            background: white;
+        }
+
+    .btn-search {
+        background: var(--color-accent);
+        color: white;
+        border: none;
+        border-radius: 0 12px 12px 0;
+        padding: 12px 20px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-search:hover {
+            background: var(--color-success);
+            transform: translateY(-1px);
+        }
+
+    /* Filtros */
+    .filters-section {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 25px 0;
+        border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    .filter-label {
+        color: var(--color-texto);
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .filter-input {
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 10px 15px;
+        transition: all 0.3s ease;
+    }
+
+        .filter-input:focus {
+            border-color: var(--color-principal);
+            box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.15);
+        }
+
+    /* Sección destacados */
+    .featured-section {
+        padding: 40px 0;
+        background: rgba(255, 255, 255, 0.5);
+    }
+
+    .section-title {
+        color: var(--color-principal);
+        font-weight: 700;
+        margin-bottom: 25px;
+        font-size: 1.5rem;
+    }
+
+    .featured-carousel {
+        display: flex;
+        overflow-x: auto;
+        gap: 20px;
+        padding: 10px 0;
+    }
+
+    .featured-item {
+        min-width: 300px;
+    }
+
+    .featured-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.1);
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+        .featured-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.15);
+        }
+
+    .featured-image-container {
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .featured-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease;
+    }
+
+    .featured-card:hover .featured-image {
+        transform: scale(1.05);
+    }
+
+    .featured-content {
+        padding: 20px;
+    }
+
+    .featured-title {
+        color: var(--color-texto);
+        font-weight: 700;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+    }
+
+    .featured-description {
+        color: #6b7280;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+        line-height: 1.4;
+    }
+
+    .featured-price {
+        color: var(--color-principal);
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    .btn-featured {
+        background: var(--color-accent);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 20px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-featured:hover {
+            background: var(--color-principal);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+    /* Grid de productos */
+    .products-grid-section {
+        padding: 40px 0;
+    }
+
+    .product-item {
+        margin-bottom: 30px;
+    }
+
+    .product-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.1);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(59, 130, 246, 0.05);
+    }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.15);
+        }
+
+    .product-image-container {
+        position: relative;
+        height: 250px;
+        overflow: hidden;
+    }
+
+    .product-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease;
+    }
+
+    .product-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(59, 130, 246, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .product-card:hover .product-overlay {
+        opacity: 1;
+    }
+
+    .product-card:hover .product-image {
+        transform: scale(1.1);
+    }
+
+    .btn-quick-view {
+        background: white;
+        color: var(--color-principal);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-quick-view:hover {
+            background: var(--color-accent);
+            color: white;
+            transform: scale(1.1);
+        }
+
+    .product-content {
+        padding: 20px;
+    }
+
+    .product-name {
+        color: var(--color-texto);
+        font-weight: 700;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+    }
+
+    .product-rating {
+        margin-bottom: 12px;
+    }
+
+        .product-rating .fas,
+        .product-rating .far {
+            color: #fbbf24;
+            font-size: 0.9rem;
+            margin-right: 2px;
+        }
+
+    .product-price {
+        color: var(--color-principal);
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    .product-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-product-details {
+        background: transparent;
+        color: var(--color-principal);
+        border: 2px solid var(--color-principal);
+        border-radius: 8px;
+        padding: 8px 15px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        flex: 1;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        text-align: center;
+    }
+
+        .btn-product-details:hover {
+            background: var(--color-principal);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+    .btn-add-to-cart {
+        background: var(--color-success);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 15px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        flex: 1;
+        transition: all 0.3s ease;
+    }
+
+        .btn-add-to-cart:hover {
+            background: #059669;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+    /* Botón cargar más */
+    .load-more-section {
+        text-align: center;
+        padding: 30px 0;
+    }
+
+    .btn-load-more {
+        background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-principal) 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 15px 40px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-load-more:hover {
+            background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-hover) 100%);
+            color: white;
+            transform: translateY(-2px);
+        }
+</style>
+
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script>
         let currentPage = 1;
         const pageSize = 10;
         let currentSearch = '';
 
         const API_ROUTES = {
-          products: '/api/productos', // <-- reemplaza esta ruta
-          carousel: '/api/productos/promociones', // <-- reemplaza esta ruta
+          products: '/api/productos',
+          carousel: '/api/productos/promociones',
         };
 
         $(document).ready(function () {
           loadProducts();
           loadCarousel();
 
-          $('#searchInput').on('keyup', function () {
+          $('#searchInput, #productSearchInput').on('keyup', function () {
             currentSearch = $(this).val();
             currentPage = 1;
             $('#productContainer').empty();
@@ -228,14 +584,34 @@
         function renderProducts(products) {
           products.forEach(product => {
             const cardHtml = `
-              <div class="col-md-4 mb-4">
-                <div class="card">
-                  <img src="${product.imagenUrl}" class="card-img-top" alt="${product.nombre}" />
-                  <div class="card-body">
-                    <h5 class="card-title">${product.nombre}</h5>
-                    <p class="card-text">${product.descripcion}</p>
-                    <p class="text-success fw-bold">$${product.precio}</p>
-                    <button class="btn btn-primary add-to-cart" data-id="${product.id}">Agregar al carrito</button>
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="product-card">
+                  <div class="product-image-container">
+                    <img src="${product.imagenUrl}" class="product-image" alt="${product.nombre}" />
+                    <div class="product-overlay">
+                      <button class="btn-quick-view">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="product-content">
+                    <h5 class="product-name">${product.nombre}</h5>
+                    <div class="product-rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="far fa-star"></i>
+                    </div>
+                    <div class="product-price">$${product.precio}</div>
+                    <div class="product-actions">
+                      <button class="btn btn-product-details">
+                        <i class="fas fa-info-circle me-2"></i>Detalles
+                      </button>
+                      <button class="btn-add-to-cart" data-id="${product.id}">
+                        <i class="fas fa-shopping-cart me-2"></i>Agregar
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

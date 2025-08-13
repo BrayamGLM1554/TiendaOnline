@@ -1,70 +1,260 @@
 ﻿@model TiendaOnline.Models.Dto.ProductDto
 <form asp-action="ProductEdit" enctype="multipart/form-data">
-    <div class="container mt-5 p-4 rounded shadow-lg" style="background-color: #5a189a;">
-        <h2 class="text-center text-white mb-4">Editar Producto</h2>
+    <div class="container mt-5 p-4 rounded shadow-lg product-edit-container">
+        <h2 class="text-center text-white mb-4">
+            <i class="fas fa-edit me-2"></i>
+            Editar Producto
+        </h2>
         <input type="hidden" asp-for="ProductId" />
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <!-- Name -->
                 <div class="form-group row mb-3">
-                    <label class="col-sm-2 col-form-label text-white fs-5">Nombre</label>
-                    <div class="col-sm-10">
-                        <input asp-for="Name" class="form-control" placeholder="Enter product name" />
+                    <label class="col-sm-3 col-form-label text-white fs-6 fw-semibold">
+                        <i class="fas fa-tag me-2"></i>
+                        Nombre
+                    </label>
+                    <div class="col-sm-9">
+                        <input asp-for="Name" class="form-control form-control-custom" placeholder="Ingrese el nombre del producto" />
                         <span asp-validation-for="Name" class="text-warning small"></span>
                     </div>
                 </div>
                 <!-- Category -->
                 <div class="form-group row mb-3">
-                    <label class="col-sm-2 col-form-label text-white fs-5">Categoria</label>
-                    <div class="col-sm-10">
-                        <input asp-for="CategoryName" class="form-control" placeholder="Enter category" />
+                    <label class="col-sm-3 col-form-label text-white fs-6 fw-semibold">
+                        <i class="fas fa-list me-2"></i>
+                        Categoría
+                    </label>
+                    <div class="col-sm-9">
+                        <input asp-for="CategoryName" class="form-control form-control-custom" placeholder="Ingrese la categoría" />
                         <span asp-validation-for="CategoryName" class="text-warning small"></span>
                     </div>
                 </div>
                 <!-- Description -->
                 <div class="form-group row mb-3">
-                    <label class="col-sm-2 col-form-label text-white fs-5">Descripcion</label>
-                    <div class="col-sm-10">
-                        <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter description..." />
+                    <label class="col-sm-3 col-form-label text-white fs-6 fw-semibold">
+                        <i class="fas fa-align-left me-2"></i>
+                        Descripción
+                    </label>
+                    <div class="col-sm-9">
+                        <textarea asp-for="Description" class="form-control form-control-custom" rows="4" placeholder="Ingrese la descripción del producto"></textarea>
                         <span asp-validation-for="Description" class="text-warning small"></span>
                     </div>
                 </div>
                 <!-- Price -->
                 <div class="form-group row mb-3">
-                    <label class="col-sm-2 col-form-label text-white fs-5">Precio</label>
-                    <div class="col-sm-10">
-                        <input asp-for="Price" class="form-control" placeholder="e.g. 19.99" />
+                    <label class="col-sm-3 col-form-label text-white fs-6 fw-semibold">
+                        <i class="fas fa-dollar-sign me-2"></i>
+                        Precio
+                    </label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <span class="input-group-text price-symbol">$</span>
+                            <input asp-for="Price" class="form-control form-control-custom" placeholder="0.00" type="number" step="0.01" min="0" />
+                        </div>
                         <span asp-validation-for="Price" class="text-warning small"></span>
                     </div>
                 </div>
                 <!-- Image Upload -->
                 <div class="form-group row mb-3">
-                    <label class="col-sm-2 col-form-label text-white fs-5">Imagen</label>
-                    <div class="col-sm-10">
-                        <input asp-for="Image" type="file" class="form-control" />
+                    <label class="col-sm-3 col-form-label text-white fs-6 fw-semibold">
+                        <i class="fas fa-image me-2"></i>
+                        Imagen
+                    </label>
+                    <div class="col-sm-9">
+                        <input asp-for="Image" type="file" class="form-control form-control-custom file-input" accept="image/*" />
                         <input asp-for="ImageUrl" type="hidden" />
                         <input asp-for="ImageLocalPath" type="hidden" />
-                        <span asp-validation-for="Price" class="text-warning small"></span>
+                        <small class="text-light">Formatos: JPG, PNG, GIF (máx. 5MB)</small>
+                        <span asp-validation-for="Image" class="text-warning small"></span>
                     </div>
                 </div>
                 <!-- Action Buttons -->
                 <div class="row mt-4">
                     <div class="col-md-6">
-                        <a asp-action="ProductIndex" class="btn form-control text-white" style="background-color:#c14600;">Regresar</a>
+                        <a asp-action="ProductIndex" class="btn btn-back form-control">
+                            <i class="fas fa-arrow-left me-2"></i>
+                            Regresar
+                        </a>
                     </div>
                     <div class="col-md-6">
-                        <button type="submit" class="btn form-control text-white" style="background-color:#00b894;">Actualizar producto</button>
+                        <button type="submit" class="btn btn-update form-control">
+                            <i class="fas fa-save me-2"></i>
+                            Actualizar Producto
+                        </button>
                     </div>
                 </div>
             </div>
             <!-- Product Image Preview -->
-            <div class="col-md-2 text-center">
-                <img src="@Model.ImageUrl" alt="Product Image" class="img-fluid rounded border mt-3" />
+            <div class="col-md-3 text-center">
+                <div class="image-preview-container">
+                    <h6 class="text-white mb-3">
+                        <i class="fas fa-eye me-1"></i>
+                        Vista Previa
+                    </h6>
+                    <img src="@Model.ImageUrl" alt="Product Image" class="img-fluid rounded border image-preview" />
+                    <div class="image-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </form>
 
+<style>
+    :root {
+        --color-principal: #28a745;
+        --color-hover: #218838;
+        --color-dark: #1e7e34;
+        --color-light: #d4edda;
+    }
+
+    .product-edit-container {
+        background: linear-gradient(135deg, var(--color-principal) 0%, #20c997 100%);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border: none;
+    }
+
+    .form-control-custom {
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        padding: 0.75rem;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+    }
+
+        .form-control-custom:focus {
+            border-color: white;
+            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.3);
+            background-color: white;
+            transform: translateY(-1px);
+        }
+
+    .input-group-text.price-symbol {
+        background-color: var(--color-light);
+        border-color: rgba(255, 255, 255, 0.3);
+        color: var(--color-dark);
+        font-weight: 600;
+        border-radius: 10px 0 0 10px;
+    }
+
+    .file-input {
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 2px dashed rgba(255, 255, 255, 0.5);
+        padding: 1rem;
+        cursor: pointer;
+    }
+
+        .file-input:hover {
+            background-color: white;
+            border-color: white;
+        }
+
+    .btn-back {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 0.75rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            background-color: #c82333;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+
+    .btn-update {
+        background-color: var(--color-dark);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 0.75rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-update:hover {
+            background-color: #155724;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 126, 52, 0.3);
+        }
+
+    .image-preview-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .image-preview {
+        max-width: 100%;
+        height: auto;
+        border: 3px solid white !important;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+        .image-preview:hover {
+            transform: scale(1.05);
+        }
+
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+        border-radius: 10px;
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .image-preview-container:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .col-form-label i {
+        width: 20px;
+        text-align: center;
+    }
+
+    textarea.form-control-custom {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    .text-warning {
+        font-weight: 500;
+        margin-top: 0.25rem;
+    }
+</style>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Preview de imagen al seleccionar archivo
+        document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.querySelector('.image-preview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 }

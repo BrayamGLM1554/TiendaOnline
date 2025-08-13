@@ -160,21 +160,28 @@ namespace TiendaOnline.Controllers
 
 
         [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> EmailCart(CartDto cartDto)
         {
             CartDto cart = await LoadCartBaseOnLoggedInUser();
-            cart.CartHeader.Name = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Email)?.FirstOrDefault()?.Value;
-            cart.CartHeader.Email = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Name)?.FirstOrDefault()?.Value;
-            cart.CartHeader.Phone = "55052";
-            //cart.CartDetailsDtos
+
+            cart.CartHeader.Name = User.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Email)?.Value;
+            cart.CartHeader.Email = User.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Name)?.Value;
+            cart.CartHeader.Phone = "5510157876";
+
             ResponseDto? response = await _cartService.EmailCart(cart);
-            if (response != null & response.IsSuccess)
+
+            if (response != null && response.IsSuccess)
             {
-                TempData["success"] = "El carrito fue actualizado correctamente";
-                return RedirectToAction(nameof(CartIndex));
+                TempData["CartMessage"] = "El carrito fue enviado correctamente";
+                return RedirectToAction(nameof(CartIndex)); // redirige a la misma vista
             }
-            return View();
+
+            TempData["CartMessage"] = "No se pudo enviar el carrito";
+            return RedirectToAction(nameof(CartIndex));
         }
+
+
 
     }
 }

@@ -5,90 +5,109 @@
     <form method="post" asp-action="EmailCart">
         <input asp-for="CartHeader.UserId" type="hidden" />
         <input asp-for="CartHeader.CartHeaderId" type="hidden" />
-        
 
-        <div class="card">
-            <div class="card-header bg-dark text-light row" style="background-color:#5a189a!important;">
-                <div class="col-6">
-                    <h3><i class="bi bi-cart"></i> &nbsp; Shopping Cart</h3>
-                </div>
-                <div class="col-6 text-end">
-                    <a asp-action="Index" asp-controller="Home" class="btn btn-outline-warning btn-sm mt-2">Continuar Comprando</a>
-                </div>
-            </div>
-
-            <div class="card-body">
-                <div class="d-none d-lg-block mb-2">
-                    <div class="row text-info">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-5"><span class="title-orange">Detalle del Producto</span></div>
-                        <div class="col-lg-2"><span class="title-orange">Precio</span></div>
-                        <div class="col-lg-2"><span class="title-orange">Cantidad</span></div>
-                        <div class="col-lg-1"><span class="title-orange">Acciones</span></div>
-                    </div>
-                </div>
-
-                <hr />
-
-                @foreach (var cartObj in Model.CartDetailsDtos)
-                {
-                    if (cartObj?.ProductDto != null)
-                    {
-                        <div class="row align-items-center mb-3">
-                            <div class="col-4 col-md-2 text-center">
-                                <img src="@cartObj.ProductDto.Image" class="rounded" width="100" />
-                            </div>
-                            <div class="col-8 col-md-5">
-                                <h5>@cartObj.ProductDto.Name</h5>
-                                <div class="text-muted" style="font-size:11px;">@Html.Raw(cartObj.ProductDto.Description)</div>
-                            </div>
-                            <div class="col-3 col-md-2 text-md-center">
-                                <span class="fw-bold">@string.Format("{0:c}", cartObj.ProductDto.Price)</span>
-                            </div>
-                            <div class="col-3 col-md-2 text-md-center">
-                                <span class="fw-bold">@cartObj.Count</span>
-                            </div>
-                            <div class="col-2 col-lg-auto text-center">
-                                <a asp-action="Remove" asp-controller="Cart" asp-route-cartDetailsId="@cartObj.CartDetailsId" class="btn btn-sm btn-danger">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    }
-                }
-
-                <hr />
-
-                <div class="row mb-3">
+        <div class="cart-container">
+            <div class="card cart-card">
+                <div class="card-header cart-header row">
                     <div class="col-6">
-                        <span>Cupon:</span>
-                        <div class="d-flex gap-2">
-                            <input asp-for="CartHeader.CouponCode" class="form-control form-control-sm" />
-                            @if (string.IsNullOrEmpty(Model.CartHeader.CouponCode))
-                            {
-                                <button type="submit" asp-action="ApplyCoupon" asp-controller="Cart" class="btn btn-sm btn-success">Aplicar</button>
-                            }
-                            else
-                            {
-                                <button type="submit" asp-action="RemoveCoupon" asp-controller="Cart" class="btn btn-sm btn-danger">Eliminar</button>
-                            }
-                        </div>
+                        <h3 class="header-title">
+                            <i class="fas fa-shopping-bag me-2"></i>
+                            Mi Carrito de Compras
+                        </h3>
                     </div>
                     <div class="col-6 text-end">
-                        <span class="text-danger fw-bold" style="font-size:21px;">Compra Total: @string.Format("{0:c}", Model.CartHeader.CartTotal)</span><br />
-                        @if (Model.CartHeader.Discount > 0)
-                        {
-                            <span class="text-success fw-bold" style="font-size:21px;">Descuento: @string.Format("{0:c}", Model.CartHeader.Discount)</span>
-                        }
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-continue-shopping mt-2">
+                            <i class="fas fa-arrow-left me-2"></i>
+                            Seguir Comprando
+                        </a>
                     </div>
                 </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-lg w-100">
-                        <i class="fas fa-envelope"></i> Enviar Carrito por Email
-                    </button>
-                    <div class="mt-2">
-                        <a asp-action="Checkout" class="btn btn-outline-success w-100">Confirmar Pedido</a>
+                <div class="card-body cart-body">
+                    <div class="d-none d-lg-block mb-2">
+                        <div class="row cart-headers">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-5"><span class="column-header">Detalle del Producto</span></div>
+                            <div class="col-lg-2"><span class="column-header">Precio</span></div>
+                            <div class="col-lg-2"><span class="column-header">Cantidad</span></div>
+                            <div class="col-lg-1"><span class="column-header">Acciones</span></div>
+                        </div>
+                    </div>
+
+                    <hr class="header-divider" />
+
+                    @foreach (var cartObj in Model.CartDetailsDtos)
+                    {
+                        if (cartObj?.ProductDto != null)
+                        {
+                            <div class="row align-items-center mb-3 cart-item">
+                                <div class="col-4 col-md-2 text-center">
+                                    <div class="product-image-container">
+                                        <img src="@cartObj.ProductDto.Image" class="product-image rounded" width="100" />
+                                    </div>
+                                </div>
+                                <div class="col-8 col-md-5">
+                                    <h5 class="product-name">@cartObj.ProductDto.Name</h5>
+                                    <div class="product-description">@Html.Raw(cartObj.ProductDto.Description)</div>
+                                </div>
+                                <div class="col-3 col-md-2 text-md-center">
+                                    <span class="product-price">@string.Format("{0:c}", cartObj.ProductDto.Price)</span>
+                                </div>
+                                <div class="col-3 col-md-2 text-md-center">
+                                    <span class="product-quantity">@cartObj.Count</span>
+                                </div>
+                                <div class="col-2 col-lg-auto text-center">
+                                    <a asp-action="Remove" asp-controller="Cart" asp-route-cartDetailsId="@cartObj.CartDetailsId" class="btn btn-remove">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    <hr class="items-divider" />
+
+                    <div class="row mb-3 cart-summary">
+                        <div class="col-6">
+                            <div class="coupon-section">
+                                <span class="coupon-label">Código de Descuento:</span>
+                                <div class="d-flex gap-2 coupon-input-group">
+                                    <input asp-for="CartHeader.CouponCode" class="form-control coupon-input" placeholder="Ingresa tu código" />
+                                    @if (string.IsNullOrEmpty(Model.CartHeader.CouponCode))
+                                    {
+                                        <button type="submit" asp-action="ApplyCoupon" asp-controller="Cart" class="btn btn-apply-coupon">
+                                            <i class="fas fa-check me-1"></i>Aplicar
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" asp-action="RemoveCoupon" asp-controller="Cart" class="btn btn-remove-coupon">
+                                            <i class="fas fa-times me-1"></i>Eliminar
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 text-end">
+                            <div class="total-section">
+                                <div class="cart-total">Total: @string.Format("{0:c}", Model.CartHeader.CartTotal)</div>
+                                @if (Model.CartHeader.Discount > 0)
+                                {
+                                    <div class="discount-amount">Descuento: @string.Format("{0:c}", Model.CartHeader.Discount)</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center action-buttons">
+                        <button type="submit" class="btn btn-email-cart btn-lg w-100 mb-3">
+                            <i class="fas fa-paper-plane me-2"></i>
+                            Enviar Carrito por Email
+                        </button>
+                        <a asp-action="Checkout" class="btn btn-checkout w-100">
+                            <i class="fas fa-credit-card me-2"></i>
+                            Proceder al Pago
+                        </a>
                     </div>
                 </div>
             </div>
@@ -97,10 +116,333 @@
 }
 else
 {
-    <div class="text-center mt-5">
-        <i class="fas fa-shopping-cart fa-2x"></i>
-        <h4>Tu carrito está vacío</h4>
-        <p>Agrega un producto para comenzar tu compra.</p>
-        <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Ir a la tienda</a>
+    <div class="empty-cart-container">
+        <div class="empty-cart-content">
+            <div class="empty-cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h4 class="empty-cart-title">Tu carrito está vacío</h4>
+            <p class="empty-cart-message">Descubre nuestros productos y encuentra lo que necesitas</p>
+            <a asp-action="Index" asp-controller="Home" class="btn btn-start-shopping">
+                <i class="fas fa-store me-2"></i>
+                Explorar Tienda
+            </a>
+        </div>
     </div>
 }
+
+<style>
+    :root {
+        --color-principal: #3b82f6;
+        --color-hover: #2563eb;
+        --color-texto: #1f2937;
+        --color-secundario: #1e40af;
+        --color-accent: #06b6d4;
+        --color-success: #10b981;
+        --color-danger: #ef4444;
+        --color-warning: #f59e0b;
+    }
+
+    .cart-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 30px 15px;
+    }
+
+    .cart-card {
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+        border: none;
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        overflow: hidden;
+    }
+
+    .cart-header {
+        background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-secundario) 100%);
+        color: white;
+        padding: 25px 30px;
+        margin: 0;
+    }
+
+    .header-title {
+        font-weight: 700;
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .btn-continue-shopping {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        padding: 8px 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-continue-shopping:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+    .cart-body {
+        padding: 30px;
+    }
+
+    .cart-headers {
+        background: rgba(59, 130, 246, 0.05);
+        border-radius: 10px;
+        padding: 15px 10px;
+    }
+
+    .column-header {
+        color: var(--color-principal);
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+    }
+
+    .header-divider {
+        border-color: var(--color-accent);
+        border-width: 2px;
+        margin: 20px 0;
+    }
+
+    .cart-item {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 20px 15px;
+        margin-bottom: 15px;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+        transition: all 0.3s ease;
+    }
+
+        .cart-item:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.1);
+        }
+
+    .product-image-container {
+        padding: 5px;
+    }
+
+    .product-image {
+        border: 3px solid var(--color-accent);
+        transition: all 0.3s ease;
+    }
+
+    .product-name {
+        color: var(--color-texto);
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .product-description {
+        color: #6b7280;
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .product-price {
+        color: var(--color-principal);
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .product-quantity {
+        background: var(--color-accent);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-weight: 700;
+    }
+
+    .btn-remove {
+        background: var(--color-danger);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 12px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-remove:hover {
+            background: #dc2626;
+            color: white;
+            transform: scale(1.1);
+        }
+
+    .items-divider {
+        border-color: var(--color-principal);
+        border-width: 1px;
+        margin: 25px 0;
+    }
+
+    .cart-summary {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        padding: 25px;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    .coupon-section .coupon-label {
+        color: var(--color-texto);
+        font-weight: 600;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .coupon-input {
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 10px 15px;
+        transition: all 0.3s ease;
+    }
+
+        .coupon-input:focus {
+            border-color: var(--color-principal);
+            box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.15);
+        }
+
+    .btn-apply-coupon {
+        background: var(--color-success);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-apply-coupon:hover {
+            background: #059669;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+    .btn-remove-coupon {
+        background: var(--color-danger);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-remove-coupon:hover {
+            background: #dc2626;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+    .total-section {
+        text-align: right;
+    }
+
+    .cart-total {
+        color: var(--color-principal);
+        font-weight: 800;
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+    }
+
+    .discount-amount {
+        color: var(--color-success);
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .action-buttons {
+        margin-top: 30px;
+    }
+
+    .btn-email-cart {
+        background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-principal) 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 15px 30px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+    }
+
+        .btn-email-cart:hover {
+            background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-hover) 100%);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    .btn-checkout {
+        background: transparent;
+        color: var(--color-principal);
+        border: 3px solid var(--color-principal);
+        border-radius: 12px;
+        padding: 15px 30px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+        .btn-checkout:hover {
+            background: var(--color-principal);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    .empty-cart-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+    }
+
+    .empty-cart-content {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 60px 40px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+    }
+
+    .empty-cart-icon {
+        font-size: 4rem;
+        color: var(--color-principal);
+        margin-bottom: 20px;
+    }
+
+    .empty-cart-title {
+        color: var(--color-texto);
+        font-weight: 700;
+        margin-bottom: 15px;
+        font-size: 1.8rem;
+    }
+
+    .empty-cart-message {
+        color: #6b7280;
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+
+    .btn-start-shopping {
+        background: var(--color-principal);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 15px 30px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+        .btn-start-shopping:hover {
+            background: var(--color-hover);
+            color: white;
+            transform: translateY(-2px);
+        }
+</style>

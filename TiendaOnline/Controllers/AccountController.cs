@@ -91,7 +91,11 @@ namespace TiendaOnline.Controllers
             identity.AddClaim(new Claim(ClaimTypes.Name,
                 jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Name).Value));
 
-            identity.AddClaim(new Claim(ClaimTypes.Role, jwt.Claims.FirstOrDefault(u => u.Type == "role").Value));
+            var roleClaim = jwt.Claims.FirstOrDefault(u => u.Type == "role");
+            if (roleClaim != null)
+            {
+                identity.AddClaim(new Claim(ClaimTypes.Role, roleClaim.Value));
+            }
 
 
             var principal = new ClaimsPrincipal(identity);

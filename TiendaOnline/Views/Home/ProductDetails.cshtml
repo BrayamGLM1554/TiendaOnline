@@ -3,82 +3,579 @@
     ViewData["Title"] = "ProductDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="product-container animate-fade">
+
+<div class="product-details-container">
     <form method="post" asp-action="ProductDetails" asp-controller="Home">
         <input asp-for="ProductId" hidden />
-        <div class="product-card">
-            <div class="product-header">
-                <h1 class="product-title">@Model.Name</h1>
-                <div class="product-price">@string.Format("{0:c}", Model.Price)</div>
+        <div class="product-details-card">
+            <!-- Header del producto -->
+            <div class="product-details-header">
+                <div class="breadcrumb-section">
+                    <nav class="breadcrumb-nav">
+                        <a href="#" class="breadcrumb-link">
+                            <i class="fas fa-home me-2"></i>Inicio
+                        </a>
+                        <span class="breadcrumb-separator">
+                            <i class="fas fa-chevron-right"></i>
+                        </span>
+                        <a href="#" class="breadcrumb-link">Productos</a>
+                        <span class="breadcrumb-separator">
+                            <i class="fas fa-chevron-right"></i>
+                        </span>
+                        <span class="breadcrumb-current">@Model.Name</span>
+                    </nav>
+                </div>
+
+                <div class="product-title-section">
+                    <h1 class="product-title">
+                        <i class="fas fa-box me-2"></i>
+                        @Model.Name
+                    </h1>
+                    <div class="product-category">
+                        <span class="category-badge">@Model.CategoryName</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="product-body">
-                <div class="product-grid">
-                    <div class="product-image-container">
-                        <img src="@Model.ImageUrl" alt="@Model.Name" />
-                    </div
-                    <div class="product-info">
-                        <div>
-                            <span>@Model.CategoryName</span>
-                            <div>@Html.Raw(Model.Description)</div>
+            <!-- Cuerpo del producto -->
+            <div class="product-details-body">
+                <div class="product-details-grid">
+                    <!-- Imagen del producto -->
+                    <div class="product-image-section">
+                        <div class="product-image-container">
+                            <img src="@Model.ImageUrl" alt="@Model.Name" class="product-main-image" />
+                            <div class="image-overlay">
+                                <button type="button" class="btn-zoom">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                           <label for="Count">Cantidad:</label>
-                           <div>
-                              <button type="button" onclick="decrementQuantity()">-</button>
-                              <input id="Count" asp-for="Count" type="number" name="Count" value="1" min="1" />
-                              <button type="button" onclick="incrementQuantity()">+</button>
-                           </div>
-                           <span asp-validation-for="Count" class="text-danger"></span>
+                    </div>
+
+                    <!-- Información del producto -->
+                    <div class="product-info-section">
+                        <div class="product-price-container">
+                            <div class="product-price">@string.Format("{0:c}", Model.Price)</div>
+                            <div class="price-label">Precio unitario</div>
+                        </div>
+
+                        <div class="product-description">
+                            <h3 class="description-title">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Descripción del Producto
+                            </h3>
+                            <div class="description-content">@Html.Raw(Model.Description)</div>
+                        </div>
+
+                        <div class="product-rating-section">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="rating-text">4.2 de 5 estrellas (128 reseñas)</div>
+                        </div>
+
+                        <!-- Selector de cantidad -->
+                        <div class="quantity-section">
+                            <label class="quantity-label">
+                                <i class="fas fa-calculator me-2"></i>
+                                Cantidad:
+                            </label>
+                            <div class="quantity-controls">
+                                <button type="button" class="btn-quantity btn-decrease" onclick="decrementQuantity()">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <input id="Count" asp-for="Count" type="number" name="Count" value="1" min="1" class="quantity-input" />
+                                <button type="button" class="btn-quantity btn-increase" onclick="incrementQuantity()">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <span id="CountValidation" asp-validation-for="Count" class="validation-message"></span>
+                        </div>
+
+                        <!-- Características adicionales -->
+                        <div class="product-features">
+                            <h4 class="features-title">
+                                <i class="fas fa-check-circle me-2"></i>
+                                Características
+                            </h4>
+                            <ul class="features-list">
+                                <li><i class="fas fa-truck me-2"></i>Envío gratis en pedidos superiores a $50</li>
+                                <li><i class="fas fa-shield-alt me-2"></i>Garantía de 1 año</li>
+                                <li><i class="fas fa-undo me-2"></i>Devolución gratuita en 30 días</li>
+                                <li><i class="fas fa-headset me-2"></i>Soporte técnico 24/7</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="product-footer">
-                <a asp-action="Index" asp-controller="Home">
-                    <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                Volver a la tienda
-                </a>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-shopping-cart"></i>
-                    Añadir al carrito
-                </button>
+
+            <!-- Footer con acciones -->
+            <div class="product-details-footer">
+                <div class="action-buttons">
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-back">
+                        <i class="fas fa-arrow-left me-2"></i>
+                        Volver a la tienda
+                    </a>
+
+                    <div class="primary-actions">
+                        <button type="button" class="btn btn-wishlist">
+                            <i class="fas fa-heart me-2"></i>
+                            Favoritos
+                        </button>
+                        <button type="submit" class="btn btn-add-to-cart">
+                            <i class="fas fa-shopping-cart me-2"></i>
+                            Añadir al carrito
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
 </div>
+
+<style>
+    :root {
+        --color-principal: #3b82f6;
+        --color-hover: #2563eb;
+        --color-texto: #1f2937;
+        --color-secundario: #1e40af;
+        --color-accent: #06b6d4;
+        --color-success: #10b981;
+        --color-danger: #ef4444;
+        --color-warning: #f59e0b;
+    }
+
+    .product-details-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 30px 15px;
+    }
+
+    .product-details-card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+        border: none;
+        overflow: hidden;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Header */
+    .product-details-header {
+        background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-secundario) 100%);
+        color: white;
+        padding: 25px 30px;
+    }
+
+    .breadcrumb-section {
+        margin-bottom: 20px;
+    }
+
+    .breadcrumb-nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        opacity: 0.9;
+    }
+
+    .breadcrumb-link {
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .breadcrumb-link:hover {
+            color: var(--color-accent);
+        }
+
+    .breadcrumb-separator {
+        opacity: 0.7;
+        font-size: 0.8rem;
+    }
+
+    .breadcrumb-current {
+        opacity: 0.8;
+        font-weight: 600;
+    }
+
+    .product-title {
+        font-weight: 700;
+        margin: 0;
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .category-badge {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    /* Cuerpo */
+    .product-details-body {
+        padding: 40px 30px;
+    }
+
+    .product-details-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+    }
+
+    /* Imagen */
+    .product-image-section {
+        position: relative;
+    }
+
+    .product-image-container {
+        position: relative;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.1);
+        overflow: hidden;
+    }
+
+    .product-main-image {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 3px solid var(--color-accent);
+        transition: all 0.3s ease;
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .product-image-container:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .product-image-container:hover .product-main-image {
+        transform: scale(1.05);
+    }
+
+    .btn-zoom {
+        background: var(--color-principal);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-zoom:hover {
+            background: var(--color-hover);
+            transform: scale(1.1);
+        }
+
+    /* Información del producto */
+    .product-info-section {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .product-price-container {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    .product-price {
+        color: var(--color-principal);
+        font-weight: 800;
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+    }
+
+    .price-label {
+        color: #6b7280;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .product-description {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 25px;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    .description-title {
+        color: var(--color-texto);
+        font-weight: 700;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+    }
+
+    .description-content {
+        color: #6b7280;
+        line-height: 1.6;
+        font-size: 1rem;
+    }
+
+    /* Rating */
+    .product-rating-section {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    .rating-stars {
+        margin-bottom: 8px;
+    }
+
+        .rating-stars .fas,
+        .rating-stars .far {
+            color: #fbbf24;
+            font-size: 1.2rem;
+            margin: 0 2px;
+        }
+
+    .rating-text {
+        color: #6b7280;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    /* Cantidad */
+    .quantity-section {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 25px;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    .quantity-label {
+        color: var(--color-texto);
+        font-weight: 700;
+        margin-bottom: 15px;
+        display: block;
+        font-size: 1.1rem;
+    }
+
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        max-width: 150px;
+        margin: 0 auto;
+    }
+
+    .btn-quantity {
+        background: var(--color-principal);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-decrease {
+        border-radius: 8px 0 0 8px;
+    }
+
+    .btn-increase {
+        border-radius: 0 8px 8px 0;
+    }
+
+    .btn-quantity:hover {
+        background: var(--color-hover);
+        transform: scale(1.1);
+    }
+
+    .quantity-input {
+        border: 2px solid var(--color-principal);
+        border-left: none;
+        border-right: none;
+        width: 70px;
+        height: 40px;
+        text-align: center;
+        font-weight: 700;
+        background: white;
+    }
+
+        .quantity-input:focus {
+            outline: none;
+            background: #f8fafc;
+        }
+
+    .validation-message {
+        color: var(--color-danger);
+        font-size: 0.8rem;
+        margin-top: 8px;
+        display: block;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    /* Características */
+    .product-features {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 25px;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    .features-title {
+        color: var(--color-texto);
+        font-weight: 700;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+    }
+
+    .features-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .features-list li {
+            color: #6b7280;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+            .features-list li i {
+                color: var(--color-success);
+                margin-right: 8px;
+            }
+
+    /* Footer */
+    .product-details-footer {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-top: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .primary-actions {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn-back {
+        background: transparent;
+        color: var(--color-principal);
+        border: 2px solid var(--color-principal);
+        border-radius: 12px;
+        padding: 12px 25px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            background: var(--color-principal);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    .btn-wishlist {
+        background: transparent;
+        color: var(--color-danger);
+        border: 2px solid var(--color-danger);
+        border-radius: 12px;
+        padding: 12px 20px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+    }
+
+        .btn-wishlist:hover {
+            background: var(--color-danger);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    .btn-add-to-cart {
+        background: linear-gradient(135deg, var(--color-success) 0%, var(--color-accent) 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 30px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-add-to-cart:hover {
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-principal) 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+
+
+    }
+</style>
+
 <script>
     function incrementQuantity() {
         const countInput = document.getElementById('Count');
-        input.value = parseInt(countInput.value) + 1;
+        countInput.value = parseInt(countInput.value) + 1;
         validateQuantity();
     }
-    function decrementQuantity(){
+
+    function decrementQuantity() {
         const countInput = document.getElementById('Count');
-        if (parseInt(input.value > 1){
-            input.value = parseInt(countInput.value) - 1;
+        if (parseInt(countInput.value) > 1) {
+            countInput.value = parseInt(countInput.value) - 1;
         }
         validateQuantity();
     }
+
     function validateQuantity() {
-        const validation = document.getElementById('CountValidation')
-        if (parseInt(input.value) > 1 ){
+        const countInput = document.getElementById('Count');
+        const validation = document.getElementById('CountValidation');
+
+        if (parseInt(countInput.value) < 1) {
             validation.textContent = "La cantidad debe ser al menos 1";
             return false;
         } else {
-            validation.textContent ="";
+            validation.textContent = "";
             return true;
         }
     }
+
     document.getElementById('Count').addEventListener('input', validateQuantity);
+
     document.querySelector('form').addEventListener('submit', function(e) {
-        if (!validateQuantity()){
+        if (!validateQuantity()) {
             e.preventDefault();
         }
     });
-
 </script>
